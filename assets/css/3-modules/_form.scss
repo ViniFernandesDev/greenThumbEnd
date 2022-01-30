@@ -1,0 +1,61 @@
+@use '../1-base/main.scss';
+@use '../1-base/reset.scss';
+
+.inputs select{
+      -webkit-appearance: none !important;
+      -moz-appearance:     none !important;
+      padding: reset.toRem(11) reset.toRem(16);
+      font-size: reset.toRem(14);
+      border: 1px solid #A8A8A8;
+      border-radius: 19px;
+      outline: none;
+      color: #A8A8A8;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.5s ease;
+  }
+  
+  .inputs select:focus {
+      border:1px solid main.$ColorTwo;
+  }
+  
+  .inputs select {
+    background:#ffffff url("../../images/icons/down_select.png") right 15px center no-repeat;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .inputs .btn {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+  }
+
+  .inputs .btn input[type="submit"] {
+      border:none;
+      outline: none;
+      cursor:pointer;
+      margin: 20px 0 0 0;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      background: main.$ColorTwo;
+      color: #fff;
+      display: inline-block;
+      padding: reset.toRem(18) reset.toRem(16);
+      font-size: reset.toRem(16);
+      font-weight: 400;
+      margin-top: 20px;
+      min-width: 150px;
+      border:3px solid transparent;
+
+      &:hover {
+        border:3px solid main.$ColorTwo;
+        background: main.$ColorOne;
+        color:#ffffff;
+    }
+  }
+
+  /**/
+  
+  .formulario.inputs ::-webkit-input-placeholder {
+      color: #A8A8A8;
+  }

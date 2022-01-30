@@ -1,0 +1,117 @@
+@use 'reset';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
+
+// CONTAINER VARIABLE
+$largureContainer: reset.toRem(940); // Adicionar 40px no valor do container para uso de padding no responsivo 
+
+// VARIABLES
+$ColorZero:#15573F;
+$ColorOne: #FD9872;
+$ColorTwo: #75BC97;
+$ColorThree: #ffffff;
+
+html {
+   scroll-behavior: smooth;
+}
+
+/**/
+body {
+   background:#F2F2F2;
+   font-family: 'Montserrat', sans-serif;
+   color:$ColorOne;
+   font-weight:500;
+   letter-spacing: 0;
+}
+
+p {
+   font-size: 1rem;
+   font-family: 'Montserrat', sans-serif;
+   color:$ColorOne;
+   line-height: 2;
+   font-weight: 500;
+   letter-spacing: 0;
+   margin-bottom: 20px;
+}
+
+// DISPLAY FLEX
+@mixin FlexBetCen {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+} 
+
+@mixin FlexCenCen {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+} 
+
+// ESTILOS E TAMANHOS DE FONTE
+@mixin titleType1 {
+   font-size: reset.toRem(70);
+   font-weight: 900;
+} 
+
+@mixin titleType2 {
+   font-size: reset.toRem(50);
+   line-height: 1.2;
+   font-weight: 900;
+} 
+
+@mixin titleType3 {
+   font-size: reset.toRem(40);
+   font-weight: 900;
+} 
+
+@mixin titleType4 {
+   font-size: reset.toRem(30);
+   font-weight: 900;
+} 
+
+@mixin titleType5 {
+   font-size: reset.toRem(20);
+} 
+
+@mixin titleType6 {
+   font-size: reset.toRem(15);
+} 
+
+// BREAKPOINTS
+
+@mixin breakpoint($point) {
+    @if $point == smashDesktopLarge {
+      @media screen and (max-width: 87.5rem) { @content ; } // 1400px
+   }
+   @else if $point == smashDesktop {
+      @media (max-width: 75rem) { @content ; } //1200px
+   }
+   @else if $point == smashLaptop {
+      @media (max-width: 64rem) { @content ; } //1024px
+   }
+     @else if $point == smashTabletBig {
+      @media (max-width: 56.25rem) { @content ; } //900px
+   }
+    @else if $point == smashTablet {
+      @media (max-width: 37.5rem)  { @content ; } //600px
+   }
+   @else if $point == smashMobile {
+      @media (max-width: 25rem)  { @content ; } //400px
+   }
+
+   @else if $point == smashContainer {
+    @media (max-width: $largureContainer)  { @content ; }
+ }
+}
+
+
+
+/*CONTAINER*/
+
+.container {
+  margin:0 auto;
+  max-width: $largureContainer;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+// largureContainer -> BREAKPOINT DA LARGURA DO CONTAINER
