@@ -460,6 +460,38 @@ RESPONSIVE
   CONTENT PLANTS / LIST PLANTS
   ========================================
 */
+#loading {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 80px;
+  opacity: 0;
+  transition: 0.3s all;
+}
+#loading .display {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+}
+#loading .display .icone {
+  opacity: 0;
+  transition: 0.7s all;
+}
+
+#loading.ativo {
+  background: #020000;
+  z-index: 6;
+  height: 100vh;
+  opacity: 1;
+}
+#loading.ativo .icone {
+  opacity: 1;
+}
+
 .out_results_efect {
   position: relative;
 }
@@ -476,10 +508,11 @@ RESPONSIVE
   transition: 0.3s all;
 }
 #content_plants.ativo {
-  height: 100%;
+  height: auto;
   overflow: visible;
   opacity: 1;
   background: #f2f2f2;
+  z-index: 4;
 }
 #content_plants .title img {
   display: block;
@@ -697,3 +730,5 @@ RESPONSIVE
 
 /**/
 /**/
+
+/*# sourceMappingURL=style.css.map */

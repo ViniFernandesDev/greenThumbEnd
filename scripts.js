@@ -6,9 +6,29 @@ function scrollWin() {
 
 document.querySelectorAll('.request').forEach(item => {
     item.addEventListener('change', loadPlants);
-
-    console.log(this);
 });
+
+const loader = document.getElementById("loading");
+
+function loadingActive() {
+    let divLoadText = document.getElementById("textLoading");
+    let textLoad = "Demora no carregamento, tente recarregar a página";
+    
+
+    loader.classList.add("ativo");
+
+    setTimeout(() => {
+        divLoadText.textContent = textLoad;
+      }, "10000")
+
+}
+
+function removeLoadingActive() {
+    let divLoadText = document.getElementById("textLoading");
+
+    loader.classList.remove("ativo");
+    divLoadText.textContent = "";
+}
 
 function loadPlants() {
     const sun = document.getElementById('sun');
@@ -25,12 +45,15 @@ function loadPlants() {
         const listPlants = document.getElementById('content_plants');
         const noResults = document.getElementById('no_results');
 
+        loadingActive();
+
         fetch(url)
             .then(function(response) {
                 return response.json();
             })
             .then(function(jsonResponse) {
                 if(jsonResponse.status != 404) {
+                    removeLoadingActive();
                     listPlants.classList.add("ativo");
                     noResults.classList.remove("ativo");
                     
@@ -44,7 +67,7 @@ function loadPlants() {
                     noResults.classList.add("ativo");
                 }
             });
-    }
+    } 
 }
 
 function showResults(response) {
