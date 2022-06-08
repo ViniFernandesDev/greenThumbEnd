@@ -439,9 +439,9 @@ RESPONSIVE
     font-weight: 500;
     color: #ffffff;
 
-    & .icone {
+    & .icone img {
       opacity: 0;
-      transition: 0.7s all;
+      transition: 1s all;
     }
   }
 }
@@ -452,7 +452,7 @@ RESPONSIVE
   height: 100vh;
   opacity: 1;
 
-  & .icone {
+  & .icone img {
     opacity: 1;
   }
 }

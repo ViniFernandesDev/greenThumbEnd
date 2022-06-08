@@ -27,7 +27,10 @@ function removeLoadingActive() {
     let divLoadText = document.getElementById("textLoading");
 
     loader.classList.remove("ativo");
-    divLoadText.textContent = "";
+    
+    setTimeout(() => {
+        divLoadText.textContent = "";
+      }, "0")
 }
 
 function loadPlants() {
