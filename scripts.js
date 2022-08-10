@@ -1,31 +1,17 @@
-function scrollWin() {
-    window.scrollTo(0, 500);
-  }
-  
-/*LIST PLANTS*/
-
-document.querySelectorAll('.request').forEach(item => {
-    item.addEventListener('change', loadPlants);
-});
-
 const loader = document.getElementById("loading");
 
-function loadingActive() {
-    let divLoadText = document.getElementById("textLoading");
-    let textLoad = "Demora no carregamento, tente recarregar a página";
-    
+let divLoadText = document.getElementById("textLoading");
+let textLoad = "Demora no carregamento, tente recarregar a página";
 
+function loadingActive(divLoadText, textLoad) {
     loader.classList.add("ativo");
 
     setTimeout(() => {
         divLoadText.textContent = textLoad;
       }, "10000")
-
 }
 
-function removeLoadingActive() {
-    let divLoadText = document.getElementById("textLoading");
-
+function removeLoadingActive(textLoad) {
     loader.classList.remove("ativo");
     
     setTimeout(() => {
@@ -48,7 +34,7 @@ function loadPlants() {
         const listPlants = document.getElementById('content_plants');
         const noResults = document.getElementById('no_results');
 
-        loadingActive();
+        loadingActive(divLoadText, textLoad);
 
         fetch(url)
             .then(function(response) {
@@ -56,7 +42,8 @@ function loadPlants() {
             })
             .then(function(jsonResponse) {
                 if(jsonResponse.status != 404) {
-                    removeLoadingActive();
+                    removeLoadingActive(divLoadText);
+
                     listPlants.classList.add("ativo");
                     noResults.classList.remove("ativo");
                     
@@ -93,3 +80,14 @@ function showResults(response) {
         </div>
     `;
 }
+
+/*LIST PLANTS*/
+document.querySelectorAll('.request').forEach(item => {
+    item.addEventListener('change', loadPlants);
+});
+
+/*SCROL TOP*/
+function scrollWin() {
+    window.scrollTo(0, 500);
+  }
+  
