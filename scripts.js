@@ -8,15 +8,15 @@ function loadingActive(divLoadText, textLoad) {
 
     setTimeout(() => {
         divLoadText.textContent = textLoad;
-      }, "10000")
+    }, "10000")
 }
 
 function removeLoadingActive(textLoad) {
     loader.classList.remove("ativo");
-    
+
     setTimeout(() => {
         divLoadText.textContent = "";
-      }, "0")
+    }, "0")
 }
 
 function loadPlants() {
@@ -29,7 +29,7 @@ function loadPlants() {
     const pets = document.getElementById('pets');
     const petsValue = pets.options[pets.selectedIndex].value;
 
-    if(sunValue && waterValue && petsValue) {
+    if (sunValue && waterValue && petsValue) {
         const url = `https://front-br-challenges.web.app/api/v2/green-thumb/?sun=${sunValue}&water=${waterValue}&pets=${petsValue}`;
         const listPlants = document.getElementById('content_plants');
         const noResults = document.getElementById('no_results');
@@ -37,16 +37,16 @@ function loadPlants() {
         loadingActive(divLoadText, textLoad);
 
         fetch(url)
-            .then(function(response) {
+            .then(function (response) {
                 return response.json();
             })
-            .then(function(jsonResponse) {
-                if(jsonResponse.status != 404) {
+            .then(function (jsonResponse) {
+                if (jsonResponse.status != 404) {
                     removeLoadingActive(divLoadText);
 
                     listPlants.classList.add("ativo");
                     noResults.classList.remove("ativo");
-                    
+
                     document.querySelectorAll('.box').forEach(item => {
                         item.remove();
                     });
@@ -57,12 +57,16 @@ function loadPlants() {
                     noResults.classList.add("ativo");
                 }
             });
-    } 
+    }
 }
 
 function showResults(response) {
     const mostraPlantas = document.getElementById('list_plants');
-
+    let teste = {
+        id: 1,
+        name: "teste"
+    };
+    teste = JSON.stringify(response);
     mostraPlantas.innerHTML += `
         <div class='box ${response.staff_favorite}-staff'>
             <img src='${response.url}'/>
@@ -70,6 +74,7 @@ function showResults(response) {
             <div class="txt">
                 <h3>${response.name}</h3>
                 <h4>$${response.price}</h4>
+                <a class="favorited" onclick='favoritePlant(${teste})'></a>
 
                 <div class="icons">
                     <div><img src="assets/images/icons/${response.sun}-sun.svg"></div>
@@ -89,5 +94,22 @@ document.querySelectorAll('.request').forEach(item => {
 /*SCROL TOP*/
 function scrollWin() {
     window.scrollTo(0, 500);
-  }
-  
+}
+
+// Function for add plant favorite
+const favoritePlant = (favorite) => {
+
+    const saveLocal = JSON.parse(localStorage.getItem('favorited'));
+    const favorited = [];
+
+    if (saveLocal) {
+        saveLocal.forEach(plant => {
+            favorited.push(plant);
+        })
+    }
+
+    console.log(favorite) 
+    favorited.push(favorite);
+ 
+    localStorage.setItem('favorited', JSON.stringify(favorited));
+}

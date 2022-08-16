@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap");
-/*RESET*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap"); /*RESET*/
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -572,6 +571,16 @@ RESPONSIVE
   justify-content: flex-end;
   gap: 0 8px;
 }
+#content_plants #list_plants .box .txt .favorited {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  cursor: pointer;
+  background: url(../images/icons/favorited.png) no-repeat center center;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
 #content_plants #list_plants .box:nth-child(1) {
   grid-row: 1/3;
   width: 100%;
@@ -624,7 +633,7 @@ RESPONSIVE
 #content_plants .back_top a span {
   display: flex;
   align-items: center;
-  background: url(../images/icons/arrow-up.svg) left center no-repeat;
+  background: url(../../images/icons/arrow-up.svg) left center no-repeat;
   padding-left: 35px;
   height: 100%;
 }
@@ -700,7 +709,7 @@ RESPONSIVE
 }
 
 .inputs select {
-  background: #ffffff url("../images/icons/down_select.png") right 15px center no-repeat;
+  background: #ffffff url("../../images/icons/down_select.png") right 15px center no-repeat;
   width: 100%;
   cursor: pointer;
 }
@@ -739,7 +748,6 @@ RESPONSIVE
   color: #A8A8A8;
 }
 
-/**/
-/**/
+/**/ /**/
 
 /*# sourceMappingURL=style.css.map */

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="#15573F"/>
+    <meta name="theme-color" content="#15573F" />
     <meta name="robots" content="index, follow">
     <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
     <meta name="description" content="Find the plant that best fits your environment :)">
@@ -13,137 +14,166 @@
     <title>Green Thumb</title>
 
 </head>
+
 <body>
 
-<section class="banner">
-    <div class="container">
-
-        <img src="assets/images/icons/logo-white.svg" alt="Logo Green Thumb" class="logo">
-
-        <h1>Find your<br> next green<br> friend</h1>
-
-        <img src="assets/images/icons/seta.png" alt="seta" class="seta">
-
-    </div><!--container-->
-
-    <div class="desktop">
-        <img src="assets/images/hero/desktop/left-leaves.png" class="img1" alt="Left Leaves">
-        <img src="assets/images/hero/desktop/plantperson.png" class="img2" alt="Plant Person">
-        <img src="assets/images/hero/desktop/right-leaves.png" class="img3" alt="Right Leaves">
-    </div><!--desktop-->
-
-    <div class="mobile">
-        <img src="assets/images/hero/mobile/mobile-leaves.png" alt="Top Leaves" class="img1">
-        <img src="assets/images/hero/mobile/mobile-plantperson.png" alt="Plant Person" class="img2">
-    </div><!--mobile-->
-</section><!--banner-->
-
-<section class="choices inputs">
-    <div class="container">
-
-        <div class="item">
-            <div class="img">
-                <img src="assets/images/illustrations/sun.png" alt="Sun">
-            </div><!--img-->
-
-            <p>1. Set the amount of <b>sunlight</b> <span>your plant will get.</span></p>
-
-            <select class="request" id="sun" name="sun">
-                <option value="">Select...</option>
-                <option value="no">No</option>
-                <option value="low">low</option>
-                <option value="high">High</option>
-            </select>
-        </div><!--item-->
-
-        <div class="item">
-            <div class="img">
-                <img src="assets/images/illustrations/wateringcan.png" alt="Wateringcan">
-            </div><!--img-->
-
-            <p>2. How often do you want to <span><b>water</b> your plant?</span></p>
-
-            <select class="request" id="water" name="water">
-                <option value="">Select...</option>
-                <option value="regularly">Regularly</option>
-                <option value="daily">Daily</option>
-                <option value="rarely">Rarely</option>
-            </select>
-        </div><!--item-->
-
-        <div class="item">
-            <div class="img">
-                <img src="assets/images/illustrations/dog.png" alt="Dog">
-            </div><!--img-->
-
-            <p>3. Do you have pets? Do <span>they <b>chew</b> plants?</span> </p>
-
-            <select class="request" id="pets" name="pets">
-                <option value="">Select...</option>
-                <option value="true">True</option>
-                <option value="false">False</option>
-            </select>
-        </div><!--item-->
-        
-    </div><!--container-->
-</section><!--choices-->
-
-<div class="out_results_efect">
-
-    <div id="loading">
-        <div class="display">
-
-            <div class="icone">
-                <img src="assets/images/loading.gif" alt="">
-                Buscando informações
-            </div><!--icone-->
-
-            <div id="textLoading"></div><!--textLoading-->
-
-        </div><!--display-->
-    </div><!--loading-->
-
-    <section id="no_results">
+    <section class="banner">
         <div class="container">
 
-            <div class="txt">
-                <h2>No results yet…</h2>
+            <img src="assets/images/icons/logo-white.svg" alt="Logo Green Thumb" class="logo">
 
-                <p>Use the filters above to find<br> the plant that best fits your<br> environment :)  </p>
-            </div><!--txt-->
+            <h1>Find your<br> next green<br> friend</h1>
 
-            <div class="img">
-                <img src="assets/images/illustrations/no-results.png" alt="No results">
-            </div><!--img-->
+            <img src="assets/images/icons/seta.png" alt="seta" class="seta">
 
-        </div><!--container-->
-    </section><!--no_results-->
+        </div>
+        <!--container-->
 
-    <section id="content_plants">
+        <div class="desktop">
+            <img src="assets/images/hero/desktop/left-leaves.png" class="img1" alt="Left Leaves">
+            <img src="assets/images/hero/desktop/plantperson.png" class="img2" alt="Plant Person">
+            <img src="assets/images/hero/desktop/right-leaves.png" class="img3" alt="Right Leaves">
+        </div>
+        <!--desktop-->
 
+        <div class="mobile">
+            <img src="assets/images/hero/mobile/mobile-leaves.png" alt="Top Leaves" class="img1">
+            <img src="assets/images/hero/mobile/mobile-plantperson.png" alt="Plant Person" class="img2">
+        </div>
+        <!--mobile-->
+    </section>
+    <!--banner-->
+
+    <section class="choices inputs">
         <div class="container">
 
-            <div class="title">
-                <img src="assets/images/illustrations/pick.png" alt="pick" style="width:158px; height:78px;">
-            
-                <h2>Our picks for you</h2>
-            </div><!--title-->
-            
-            <div class="scroll_resp">
-                <div id="list_plants">
-                </div><!--list_plants-->
-            </div><!--scroll_resp-->
+            <div class="item">
+                <div class="img">
+                    <img src="assets/images/illustrations/sun.png" alt="Sun">
+                </div>
+                <!--img-->
 
-            <div class="back_top">
-                <a onclick="scrollWin()"><span>back to the top</span></a>
-            </div><!--back_top-->
-            <br>
+                <p>1. Set the amount of <b>sunlight</b> <span>your plant will get.</span></p>
 
-        </div><!--container-->
-    </section><!--content_plants-->
-</div><!--out_results_efect-->
+                <select class="request" id="sun" name="sun">
+                    <option value="">Select...</option>
+                    <option value="no">No</option>
+                    <option value="low">low</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <!--item-->
 
-<script src="scripts.js"></script>
+            <div class="item">
+                <div class="img">
+                    <img src="assets/images/illustrations/wateringcan.png" alt="Wateringcan">
+                </div>
+                <!--img-->
+
+                <p>2. How often do you want to <span><b>water</b> your plant?</span></p>
+
+                <select class="request" id="water" name="water">
+                    <option value="">Select...</option>
+                    <option value="regularly">Regularly</option>
+                    <option value="daily">Daily</option>
+                    <option value="rarely">Rarely</option>
+                </select>
+            </div>
+            <!--item-->
+
+            <div class="item">
+                <div class="img">
+                    <img src="assets/images/illustrations/dog.png" alt="Dog">
+                </div>
+                <!--img-->
+
+                <p>3. Do you have pets? Do <span>they <b>chew</b> plants?</span> </p>
+
+                <select class="request" id="pets" name="pets">
+                    <option value="">Select...</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </div>
+            <!--item-->
+
+        </div>
+        <!--container-->
+    </section>
+    <!--choices-->
+
+    <div class="out_results_efect">
+
+        <div id="loading">
+            <div class="display">
+
+                <div class="icone">
+                    <img src="assets/images/loading.gif" alt="">
+                    Buscando informações
+                </div>
+                <!--icone-->
+
+                <div id="textLoading"></div>
+                <!--textLoading-->
+
+            </div>
+            <!--display-->
+        </div>
+        <!--loading-->
+
+        <section id="no_results">
+            <div class="container">
+
+                <div class="txt">
+                    <h2>No results yet…</h2>
+
+                    <p>Use the filters above to find<br> the plant that best fits your<br> environment :) </p>
+                </div>
+                <!--txt-->
+
+                <div class="img">
+                    <img src="assets/images/illustrations/no-results.png" alt="No results">
+                </div>
+                <!--img-->
+
+            </div>
+            <!--container-->
+        </section>
+        <!--no_results-->
+
+        <section id="content_plants">
+
+            <div class="container">
+
+                <div class="title">
+                    <img src="assets/images/illustrations/pick.png" alt="pick" style="width:158px; height:78px;">
+
+                    <h2>Our picks for you</h2>
+                </div>
+                <!--title-->
+
+                <div class="scroll_resp">
+                    <div id="list_plants">
+                    </div>
+                    <!--list_plants-->
+                </div>
+                <!--scroll_resp-->
+
+                <div class="back_top">
+                    <a onclick="scrollWin()"><span>back to the top</span></a>
+                </div>
+                <!--back_top-->
+                <br>
+
+            </div>
+            <!--container-->
+        </section>
+        <!--content_plants-->
+    </div>
+    <!--out_results_efect-->
+
+    <script src="scripts.js"></script>
 
 </body>
+
 </html>
