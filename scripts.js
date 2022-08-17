@@ -52,6 +52,7 @@ function loadPlants() {
                     });
 
                     jsonResponse.forEach(showResults);
+                    addFavoriteCard();
                 } else {
                     listPlants.classList.remove("ativo");
                     noResults.classList.add("ativo");
@@ -104,6 +105,7 @@ const favoritePlant = (favorite) => {
 
     localStorage.setItem('favorites', JSON.stringify(favorites));
     validationFavorites(id);
+    addFavoriteCard();
 }
 
 // Get all plans save in local storage
@@ -113,9 +115,9 @@ const getLocalStorage = (favorites, id) => {
     if (saveLocal) {
         saveLocal.forEach(plant => {
             validationDelete(favorites, plant, id);
+            addFavoriteCard();
         })
     }
-
     return favorites;
 }
 
@@ -155,4 +157,61 @@ const selectFavorite = (id, type) => {
             item.classList.add('--active');
         }
     })
-} 
+}
+
+// Add favorites in the cards
+const addFavoriteCard = () => {
+    const favorites = JSON.parse(localStorage.getItem('favorites'));
+    let html = document.getElementById('list_plants_favorite');
+    html.innerHTML = '';
+
+    favorites.forEach(plant => {
+        htmlCardFavorite(plant);
+    })
+
+    html.innerHTML += `<a onclick="closeCart();event.stopPropagation()">X</a>`;
+}
+
+// Create html of the cards favorites
+const htmlCardFavorite = (plant) => {
+    let htmlAllFavorites = document.getElementById('list_plants_favorite');
+
+    htmlAllFavorites.innerHTML += `
+        <div class="favorite">
+            <img src="${plant.url}" alt="">
+
+            <div class="txt">
+                <h5>${plant.name}</h5>
+                <h6>${plant.price}</h6>
+                <a class="favorited --active" id="${plant.id}" onclick='favoritePlant(${JSON.stringify(plant)})'></a>
+
+                <div class="icons">
+                    <div><img src="assets/images/icons/${plant.sun}-sun.svg"></div>
+                    <div><img src="assets/images/icons/${plant.water}-water.svg"></div>
+                    <div><img src="assets/images/icons/${plant.toxicity}-toxic.svg"></div>
+                </div><!--icons-->
+            </div><!--txt-->
+        </div>
+    `;
+};
+
+// Active or Close informations of favorites
+const openCart = () => {
+    const list = document.getElementById('list_plants_favorite');
+
+    if (!list.classList.contains("--active")) {
+        list.classList.add('--active');
+        return;
+    }
+}
+
+// Close informations of favorites
+const closeCart = () => {
+    const list = document.getElementById('list_plants_favorite');
+
+    list.classList.remove('--active');
+}
+
+
+// Initialized cart favorites
+addFavoriteCard();

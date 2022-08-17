@@ -713,3 +713,131 @@ RESPONSIVE
     }
   }
 }
+
+/*
+  ========================================
+  ICON CART
+  ========================================
+*/
+
+#cart {
+  width: 50px;
+  height: 50px;
+  background: url('../images/icons/cart.png');
+  position: fixed;
+  bottom: 50px;
+  right: 40px;
+  z-index: 11;
+  cursor: pointer;
+
+  & #list_plants_favorite {
+    width: 280px;
+    max-height: 480px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    position: absolute;
+    right: -45px;
+    bottom: 0;
+    padding-bottom: 55px;
+    opacity: 0;
+    visibility: collapse;
+    transition: all 0.3s;
+    z-index: 10;
+
+    &.--active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    & a {
+      @include main.FlexCenCen;
+      background-color: #75bc97;
+      padding: 5px 10px;
+      border-radius: 10px;
+      color: #fff;
+      position: sticky;
+      bottom: -55px;
+      z-index: 99;
+
+      font: {
+        size: reset.toRem(18);
+        weight: 600;
+      }
+    }
+
+    & .favorite {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff9c;
+      border-radius: 10px;
+      padding: 15px 20px;
+      position: relative;
+      margin-bottom: 10px;
+      transition: all 0.5s;
+      z-index: 99;
+
+      &>img {
+        width: 100px;
+        border-radius: 20px;
+        margin: 0 auto;
+      }
+
+      & .txt {
+        width: 100%;
+        margin-top: 15px;
+        grid-template-columns: 70% 30%;
+        display: grid;
+        align-items: center;
+
+        & h5 {
+          width: 100%;
+        }
+
+        & h6 {
+          text-align: end;
+        }
+
+        & h6,
+        & h5 {
+          font-weight: bold;
+          font-size: reset.toRem(18);
+          color: #257556;
+        }
+
+        & .icons {
+          @include main.FlexBetCen;
+          justify-content: flex-end;
+          gap: 0 8px;
+          margin-top: 10px;
+
+          & img {
+            width: 27px;
+          }
+        }
+
+        & .favorited {
+          width: 30px;
+          height: 30px;
+          display: flex;
+          cursor: pointer;
+          background: url(../images/icons/favorited.png) no-repeat center center;
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          transition: all 0.5s;
+
+          &.--active {
+            background: url(../images/icons/favorite_yes.png) no-repeat center center;
+          }
+        }
+      }
+
+      &:hover {
+        background-color: rgb(227 244 235);
+        box-shadow: 0 0 20px rgb(237, 235, 235);
+      }
+    }
+  }
+}
