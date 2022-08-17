@@ -62,11 +62,8 @@ function loadPlants() {
 
 function showResults(response) {
     const mostraPlantas = document.getElementById('list_plants');
-    let teste = {
-        id: 1,
-        name: "teste"
-    };
-    teste = JSON.stringify(response);
+    const plant = JSON.stringify(response);
+
     mostraPlantas.innerHTML += `
         <div class='box ${response.staff_favorite}-staff'>
             <img src='${response.url}'/>
@@ -74,7 +71,7 @@ function showResults(response) {
             <div class="txt">
                 <h3>${response.name}</h3>
                 <h4>$${response.price}</h4>
-                <a class="favorited" onclick='favoritePlant(${teste})'></a>
+                <a class="favorited" id="${response.id}" onclick='favoritePlant(${plant})'></a>
 
                 <div class="icons">
                     <div><img src="assets/images/icons/${response.sun}-sun.svg"></div>
@@ -84,6 +81,7 @@ function showResults(response) {
             </div><!--txt-->
         </div>
     `;
+    validationFavorites(response.id);
 }
 
 /*LIST PLANTS*/
@@ -98,18 +96,63 @@ function scrollWin() {
 
 // Function for add plant favorite
 const favoritePlant = (favorite) => {
+    const id = favorite.id;
+    let favorites = [];
 
-    const saveLocal = JSON.parse(localStorage.getItem('favorited'));
-    const favorited = [];
+    favorites.push(favorite);
+    favorites = getLocalStorage(favorites, id);
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    validationFavorites(id);
+}
+
+// Get all plans save in local storage
+const getLocalStorage = (favorites, id) => {
+    const saveLocal = JSON.parse(localStorage.getItem('favorites'));
 
     if (saveLocal) {
         saveLocal.forEach(plant => {
-            favorited.push(plant);
+            validationDelete(favorites, plant, id);
         })
     }
 
-    console.log(favorite) 
-    favorited.push(favorite);
- 
-    localStorage.setItem('favorited', JSON.stringify(favorited));
+    return favorites;
 }
+
+// Validation for delete duplicates
+const validationDelete = (favorites, plant, id) => {
+    if (id == plant.id) {
+        favorites.splice(plant, 1);
+        selectFavorite(id, 'remove');
+        return;
+    }
+    favorites.push(plant);
+}
+
+// Validation itens favoriteds
+const validationFavorites = (id) => {
+    const favorites = JSON.parse(localStorage.getItem('favorites'));
+
+    if (favorites) {
+        favorites.forEach(plant => {
+            if (id == plant.id) {
+                selectFavorite(id);
+            }
+        })
+    }
+}
+
+// Select this favorite
+const selectFavorite = (id, type) => {
+    const e = document.querySelectorAll('a.favorited');
+
+    e.forEach(item => {
+        if (id == item.id) {
+            if (type) {
+                item.classList.remove('--active');
+                return;
+            }
+            item.classList.add('--active');
+        }
+    })
+} 

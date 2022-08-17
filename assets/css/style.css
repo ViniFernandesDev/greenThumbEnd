@@ -580,6 +580,10 @@ RESPONSIVE
   position: absolute;
   top: 15px;
   right: 15px;
+  transition: all 0.5s;
+}
+#content_plants #list_plants .box .txt .favorited.--active {
+  background: url(../images/icons/favorite_yes.png) no-repeat center center;
 }
 #content_plants #list_plants .box:nth-child(1) {
   grid-row: 1/3;

@@ -559,6 +559,11 @@ RESPONSIVE
           position: absolute;
           top: 15px;
           right: 15px;
+          transition: all 0.5s;
+
+          &.--active {
+            background: url(../images/icons/favorite_yes.png) no-repeat center center;
+          }
         }
       }
 
