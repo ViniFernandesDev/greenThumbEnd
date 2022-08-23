@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap");
-/*RESET*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap"); /*RESET*/
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -572,6 +571,20 @@ RESPONSIVE
   justify-content: flex-end;
   gap: 0 8px;
 }
+#content_plants #list_plants .box .txt .favorited {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  cursor: pointer;
+  background: url(../images/icons/favorited.png) no-repeat center center;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  transition: all 0.5s;
+}
+#content_plants #list_plants .box .txt .favorited.--active {
+  background: url(../images/icons/favorite_yes.png) no-repeat center center;
+}
 #content_plants #list_plants .box:nth-child(1) {
   grid-row: 1/3;
   width: 100%;
@@ -624,7 +637,7 @@ RESPONSIVE
 #content_plants .back_top a span {
   display: flex;
   align-items: center;
-  background: url(../images/icons/arrow-up.svg) left center no-repeat;
+  background: url(../../images/icons/arrow-up.svg) left center no-repeat;
   padding-left: 35px;
   height: 100%;
 }
@@ -682,6 +695,127 @@ RESPONSIVE
     margin-top: 25px;
   }
 }
+/*
+  ========================================
+  ICON CART
+  ========================================
+*/
+#cart {
+  width: 50px;
+  height: 50px;
+  background: url("../images/icons/cart.png");
+  position: fixed;
+  bottom: 50px;
+  right: 40px;
+  z-index: 11;
+  cursor: pointer;
+}
+#cart #list_plants_favorite {
+  width: 280px;
+  max-height: 480px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  position: absolute;
+  right: -45px;
+  bottom: 0;
+  padding-bottom: 55px;
+  opacity: 0;
+  visibility: collapse;
+  transition: all 0.3s;
+  z-index: 10;
+}
+#cart #list_plants_favorite.--active {
+  opacity: 1;
+  visibility: visible;
+}
+#cart #list_plants_favorite a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #75bc97;
+  padding: 5px 25px;
+  border-radius: 10px;
+  color: #fff;
+  position: sticky;
+  bottom: -55px;
+  z-index: 99;
+  transition: all 0.5s;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+#cart #list_plants_favorite a:hover {
+  background: #196146;
+}
+#cart #list_plants_favorite .favorite {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.6117647059);
+  border-radius: 10px;
+  padding: 15px 20px;
+  position: relative;
+  margin-bottom: 10px;
+  transition: all 0.5s;
+  z-index: 99;
+}
+#cart #list_plants_favorite .favorite > img {
+  width: 100px;
+  border-radius: 20px;
+  margin: 0 auto;
+  transition: all 0.5s;
+}
+#cart #list_plants_favorite .favorite > img:hover {
+  transform: scale(1.2);
+}
+#cart #list_plants_favorite .favorite .txt {
+  width: 100%;
+  margin-top: 15px;
+  grid-template-columns: 70% 30%;
+  display: grid;
+  align-items: center;
+}
+#cart #list_plants_favorite .favorite .txt h5 {
+  width: 100%;
+}
+#cart #list_plants_favorite .favorite .txt h6 {
+  text-align: end;
+}
+#cart #list_plants_favorite .favorite .txt h6, #cart #list_plants_favorite .favorite .txt h5 {
+  font-weight: bold;
+  font-size: 1.125rem;
+  color: #257556;
+}
+#cart #list_plants_favorite .favorite .txt .icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0 8px;
+  margin-top: 10px;
+}
+#cart #list_plants_favorite .favorite .txt .icons img {
+  width: 27px;
+}
+#cart #list_plants_favorite .favorite .txt .favorited {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  cursor: pointer;
+  background: url(../images/icons/favorited.png) no-repeat center center;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  transition: all 0.5s;
+}
+#cart #list_plants_favorite .favorite .txt .favorited.--active {
+  background: url(../images/icons/favorite_yes.png) no-repeat center center;
+}
+#cart #list_plants_favorite .favorite:hover {
+  background-color: rgb(227, 244, 235);
+  box-shadow: 0 0 20px rgb(237, 235, 235);
+}
+
 .inputs select {
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
@@ -700,7 +834,7 @@ RESPONSIVE
 }
 
 .inputs select {
-  background: #ffffff url("../images/icons/down_select.png") right 15px center no-repeat;
+  background: #ffffff url("../../images/icons/down_select.png") right 15px center no-repeat;
   width: 100%;
   cursor: pointer;
 }
@@ -739,7 +873,6 @@ RESPONSIVE
   color: #A8A8A8;
 }
 
-/**/
-/**/
+/**/ /**/
 
 /*# sourceMappingURL=style.css.map */

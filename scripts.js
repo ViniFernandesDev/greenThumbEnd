@@ -8,15 +8,15 @@ function loadingActive(divLoadText, textLoad) {
 
     setTimeout(() => {
         divLoadText.textContent = textLoad;
-      }, "10000")
+    }, "10000")
 }
 
 function removeLoadingActive(textLoad) {
     loader.classList.remove("ativo");
-    
+
     setTimeout(() => {
         divLoadText.textContent = "";
-      }, "0")
+    }, "0")
 }
 
 function loadPlants() {
@@ -29,7 +29,7 @@ function loadPlants() {
     const pets = document.getElementById('pets');
     const petsValue = pets.options[pets.selectedIndex].value;
 
-    if(sunValue && waterValue && petsValue) {
+    if (sunValue && waterValue && petsValue) {
         const url = `https://front-br-challenges.web.app/api/v2/green-thumb/?sun=${sunValue}&water=${waterValue}&pets=${petsValue}`;
         const listPlants = document.getElementById('content_plants');
         const noResults = document.getElementById('no_results');
@@ -37,31 +37,33 @@ function loadPlants() {
         loadingActive(divLoadText, textLoad);
 
         fetch(url)
-            .then(function(response) {
+            .then(function (response) {
                 return response.json();
             })
-            .then(function(jsonResponse) {
-                if(jsonResponse.status != 404) {
+            .then(function (jsonResponse) {
+                if (jsonResponse.status != 404) {
                     removeLoadingActive(divLoadText);
 
                     listPlants.classList.add("ativo");
                     noResults.classList.remove("ativo");
-                    
+
                     document.querySelectorAll('.box').forEach(item => {
                         item.remove();
                     });
 
                     jsonResponse.forEach(showResults);
+                    addFavoriteCard();
                 } else {
                     listPlants.classList.remove("ativo");
                     noResults.classList.add("ativo");
                 }
             });
-    } 
+    }
 }
 
 function showResults(response) {
     const mostraPlantas = document.getElementById('list_plants');
+    const plant = JSON.stringify(response);
 
     mostraPlantas.innerHTML += `
         <div class='box ${response.staff_favorite}-staff'>
@@ -70,6 +72,7 @@ function showResults(response) {
             <div class="txt">
                 <h3>${response.name}</h3>
                 <h4>$${response.price}</h4>
+                <a class="favorited" id="${response.id}" onclick='favoritePlant(${plant})'></a>
 
                 <div class="icons">
                     <div><img src="assets/images/icons/${response.sun}-sun.svg"></div>
@@ -79,6 +82,7 @@ function showResults(response) {
             </div><!--txt-->
         </div>
     `;
+    validationFavorites(response.id);
 }
 
 /*LIST PLANTS*/
@@ -89,5 +93,138 @@ document.querySelectorAll('.request').forEach(item => {
 /*SCROL TOP*/
 function scrollWin() {
     window.scrollTo(0, 500);
-  }
-  
+}
+
+// Function for add plant favorite
+const favoritePlant = (favorite) => {
+    const id = favorite.id;
+    let favorites = [];
+
+    favorites.push(favorite);
+    favorites = getLocalStorage(favorites, id);
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    validationFavorites(id);
+    addFavoriteCard();
+}
+
+// Get data save in localStorage
+const localStorageFavorites = () => {
+    return (JSON.parse(localStorage.getItem('favorites')));
+}
+
+// Get all plans save in local storage
+const getLocalStorage = (favorites, id) => {
+    const localStorage = localStorageFavorites();
+
+    if (localStorage) {
+        localStorage.forEach(plant => {
+            validationDelete(favorites, plant, id);
+            addFavoriteCard();
+        })
+    }
+    return favorites;
+}
+
+// Validation for delete duplicates
+const validationDelete = (favorites, plant, id) => {
+    if (id == plant.id) {
+        favorites.splice(plant, 1);
+        selectFavorite(id, 'remove');
+        return;
+    }
+    favorites.push(plant);
+}
+
+// Validation itens favoriteds
+const validationFavorites = (id) => {
+    const favorites = localStorageFavorites();
+
+    if (favorites) {
+        favorites.forEach(plant => {
+            if (id == plant.id) {
+                selectFavorite(id);
+            }
+        })
+    }
+}
+
+// Select this favorite
+const selectFavorite = (id, type) => {
+    const e = document.querySelectorAll('a.favorited');
+
+    e.forEach(item => {
+        if (id == item.id) {
+            if (type) {
+                item.classList.remove('--active');
+                return;
+            }
+            item.classList.add('--active');
+        }
+    })
+}
+
+// Add favorites in the cards
+const addFavoriteCard = () => {
+    const favorites = localStorageFavorites();
+    const html = document.getElementById('list_plants_favorite');
+    let allPrice = 0;
+    html.innerHTML = '';
+
+    favorites.forEach(plant => {
+        htmlCardFavorite(plant);
+        allPrice += plant.price;
+    })
+
+   allPriceFavorites(html, allPrice);
+}
+
+// Create html of the cards favorites
+const htmlCardFavorite = (plant) => {
+    const htmlAllFavorites = document.getElementById('list_plants_favorite');
+
+    htmlAllFavorites.innerHTML += `
+        <div class="favorite">
+            <img src="${plant.url}" alt="">
+
+            <div class="txt">
+                <h5>${plant.name}</h5>
+                <h6>$${plant.price}</h6>
+                <a class="favorited --active" id="${plant.id}" onclick='favoritePlant(${JSON.stringify(plant)})'></a>
+
+                <div class="icons">
+                    <div><img src="assets/images/icons/${plant.sun}-sun.svg"></div>
+                    <div><img src="assets/images/icons/${plant.water}-water.svg"></div>
+                    <div><img src="assets/images/icons/${plant.toxicity}-toxic.svg"></div>
+                </div><!--icons-->
+            </div><!--txt-->
+        </div>
+    `;
+};
+
+// Create html price total and close informations
+const allPriceFavorites = (html, price) => {
+    html.innerHTML += `
+        <a onclick="closeCart();event.stopPropagation()">X <span>Total $${price}</span></a>
+    `;
+}
+
+// Active or Close informations of favorites
+const openCart = () => {
+    const list = document.getElementById('list_plants_favorite');
+
+    if (!list.classList.contains("--active")) {
+        list.classList.add('--active');
+        return;
+    }
+}
+
+// Close informations of favorites
+const closeCart = () => {
+    const list = document.getElementById('list_plants_favorite');
+
+    list.classList.remove('--active');
+}
+
+// Initialized cart favorites
+addFavoriteCard();
