@@ -731,17 +731,21 @@ RESPONSIVE
 }
 #cart #list_plants_favorite a {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: #75bc97;
-  padding: 5px 10px;
+  padding: 5px 25px;
   border-radius: 10px;
   color: #fff;
   position: sticky;
   bottom: -55px;
   z-index: 99;
+  transition: all 0.5s;
   font-size: 1.125rem;
   font-weight: 600;
+}
+#cart #list_plants_favorite a:hover {
+  background: #196146;
 }
 #cart #list_plants_favorite .favorite {
   width: 100%;
@@ -759,6 +763,10 @@ RESPONSIVE
   width: 100px;
   border-radius: 20px;
   margin: 0 auto;
+  transition: all 0.5s;
+}
+#cart #list_plants_favorite .favorite > img:hover {
+  transform: scale(1.2);
 }
 #cart #list_plants_favorite .favorite .txt {
   width: 100%;

@@ -751,18 +751,23 @@ RESPONSIVE
     }
 
     & a {
-      @include main.FlexCenCen;
+      @include main.FlexBetCen;
       background-color: #75bc97;
-      padding: 5px 10px;
+      padding: 5px 25px;
       border-radius: 10px;
       color: #fff;
       position: sticky;
       bottom: -55px;
       z-index: 99;
+      transition: all 0.5s;
 
       font: {
         size: reset.toRem(18);
         weight: 600;
+      }
+
+      &:hover {
+        background: #196146;
       }
     }
 
@@ -782,6 +787,11 @@ RESPONSIVE
         width: 100px;
         border-radius: 20px;
         margin: 0 auto;
+        transition: all 0.5s;
+
+        &:hover {
+          transform: scale(1.2);
+        }
       }
 
       & .txt {

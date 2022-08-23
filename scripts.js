@@ -108,12 +108,17 @@ const favoritePlant = (favorite) => {
     addFavoriteCard();
 }
 
+// Get data save in localStorage
+const localStorageFavorites = () => {
+    return (JSON.parse(localStorage.getItem('favorites')));
+}
+
 // Get all plans save in local storage
 const getLocalStorage = (favorites, id) => {
-    const saveLocal = JSON.parse(localStorage.getItem('favorites'));
+    const localStorage = localStorageFavorites();
 
-    if (saveLocal) {
-        saveLocal.forEach(plant => {
+    if (localStorage) {
+        localStorage.forEach(plant => {
             validationDelete(favorites, plant, id);
             addFavoriteCard();
         })
@@ -133,7 +138,7 @@ const validationDelete = (favorites, plant, id) => {
 
 // Validation itens favoriteds
 const validationFavorites = (id) => {
-    const favorites = JSON.parse(localStorage.getItem('favorites'));
+    const favorites = localStorageFavorites();
 
     if (favorites) {
         favorites.forEach(plant => {
@@ -161,20 +166,22 @@ const selectFavorite = (id, type) => {
 
 // Add favorites in the cards
 const addFavoriteCard = () => {
-    const favorites = JSON.parse(localStorage.getItem('favorites'));
-    let html = document.getElementById('list_plants_favorite');
+    const favorites = localStorageFavorites();
+    const html = document.getElementById('list_plants_favorite');
+    let allPrice = 0;
     html.innerHTML = '';
 
     favorites.forEach(plant => {
         htmlCardFavorite(plant);
+        allPrice += plant.price;
     })
 
-    html.innerHTML += `<a onclick="closeCart();event.stopPropagation()">X</a>`;
+   allPriceFavorites(html, allPrice);
 }
 
 // Create html of the cards favorites
 const htmlCardFavorite = (plant) => {
-    let htmlAllFavorites = document.getElementById('list_plants_favorite');
+    const htmlAllFavorites = document.getElementById('list_plants_favorite');
 
     htmlAllFavorites.innerHTML += `
         <div class="favorite">
@@ -182,7 +189,7 @@ const htmlCardFavorite = (plant) => {
 
             <div class="txt">
                 <h5>${plant.name}</h5>
-                <h6>${plant.price}</h6>
+                <h6>$${plant.price}</h6>
                 <a class="favorited --active" id="${plant.id}" onclick='favoritePlant(${JSON.stringify(plant)})'></a>
 
                 <div class="icons">
@@ -194,6 +201,13 @@ const htmlCardFavorite = (plant) => {
         </div>
     `;
 };
+
+// Create html price total and close informations
+const allPriceFavorites = (html, price) => {
+    html.innerHTML += `
+        <a onclick="closeCart();event.stopPropagation()">X <span>Total $${price}</span></a>
+    `;
+}
 
 // Active or Close informations of favorites
 const openCart = () => {
@@ -211,7 +225,6 @@ const closeCart = () => {
 
     list.classList.remove('--active');
 }
-
 
 // Initialized cart favorites
 addFavoriteCard();
